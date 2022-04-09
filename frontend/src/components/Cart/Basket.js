@@ -1,3 +1,4 @@
+
 import React, { Component, useState } from 'react';
 import { MenuItems } from "./MenuItems";
 import './Navbar.css'
@@ -13,23 +14,9 @@ const example = {
     qty: 1 
 }
 
-class Navbar extends Component {
-    
-    render() {
-        return(
-            <nav className="NavbarWrapper">
 
-                    <Center >
-                        <Heading color="white" textDecoration="none" padding="0.5rem 1rem">Pamazon</Heading>
-                    </Center>
-                    <Cart>
-                        <DropMenu></DropMenu>
-                    </Cart>
-        
-            </nav> 
-        )
-    }
-}
+
+
 
 function Cart(props) {
 
@@ -77,6 +64,3 @@ function DropMenu() {
         </div>
     );
 }
-
-
-export default Navbar

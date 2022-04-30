@@ -94,12 +94,14 @@
 
 .menu-item {
     top: 60px;
-    height: 50px;
+    height: 60px;
     display: flex;
     align-items: center;
     border-radius: var(--border-radius);
     transition: background var(--speed);
     padding: 0.5rem;
+    gap: 7px;
+
 }
 
 .menu-item:hover {
@@ -110,18 +112,30 @@
     margin-left: auto;
 }
 
-.icon-button {
-    order: 0
-}
 
-.menu-item-name {
+.image-container {
     order: 1;
+    align-items: center;
+    height: 50px;
+    width: 50px;
 }
-
-.menu-item-price {
+.menu-item-name {
     order: 2;
+    font-size: 1.5em;
+}
+.menu-item-price {
+    order: 3;
+    font-size: 1.5em;
+    color: white;
+
+}
+.menu-item-qty {
+    order: 4;
 }
 
-.menu-item-qty {
-    order: 3;
+.clear-button-container {
+    height: 50px;
+    width: 95%;
+    align-items: flex-start;
+    padding-top: 10px;
 }

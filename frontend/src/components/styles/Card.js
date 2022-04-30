@@ -1,18 +1,24 @@
 import React from 'react';
 import styled from 'styled-components'
 
+import { useSelector, useDispatch } from 'react-redux';
+import { addToCart } from './../../cartSlice.js';
+
+
+
 import {
   Flex,
-  Circle,
   Box,
   Image,
-  Badge,
   useColorModeValue,
   Icon,
   Tooltip, Button
 } from '@chakra-ui/react';
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 import { FiShoppingCart } from 'react-icons/fi';
+
+
+
 
 // JSON response received from 
 const data = {
@@ -56,16 +62,12 @@ const Rating = ({ rating, numReviews }) => {
 
 
 const AddToCartButton = (props) => {
+  //Need to change how our shopping cart works; when we add an item to cart, check to see if its id exists already
+  // in the cart, if so, update the quantity for that ID in the cart
+  // cartSlice will handle this logic
 
-  function handleClick() {
-
-    const obj = {
-      name : this.name,
-      price : this.price,
-      qty : this.qty,
-    }
-    return;
-  }
+  const cardInfo = props.info
+  const dispatch = useDispatch()
 
   return(
     <Tooltip
@@ -74,7 +76,7 @@ const AddToCartButton = (props) => {
       placement={'top'}
       color={'gray.800'}
       fontSize={'1.2em'}>
-      <Button onClick={handleClick} display={'flex'}>
+      <Button onClick={() => dispatch(addToCart(cardInfo))} display={'flex'}>
         <Icon as={FiShoppingCart} h={7} w={7} alignSelf={'center'} />
       </Button>
     </Tooltip>  
@@ -83,9 +85,8 @@ const AddToCartButton = (props) => {
 
 
 
-const ProductCard = ({item}) => {
-
-  const itemInfo = item;
+const ProductCard = (props) => {
+  const information = props.item
   return (
     <Flex p={50} w="sm" alignItems="center" justifyContent="center">
       <Box
@@ -95,7 +96,8 @@ const ProductCard = ({item}) => {
         rounded="lg"
         shadow="lg"
         position="relative">
-        {data.isNew && (
+        {/*
+        {itemInfo.isNew && (
           <Circle
             size="10px"
             position="absolute"
@@ -103,30 +105,34 @@ const ProductCard = ({item}) => {
             right={2}
             bg="red.200"
           />
-        )}
+        )} */}
 
         <Image
-          src={data.imageURL}
-          alt={`Picture of ${data.name}`}
+          src={props.item.img}
+          alt={`Picture of ${props.item.name}`}
           roundedTop="sm"
+          height="358px"
         />
 
         <Box p="6">
           <Box d="flex" alignItems="baseline">
+            {/*}
             {data.isNew && (
               <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
                 New
               </Badge>
-            )}
+            )} */}
           </Box>
           <Flex mt="1" justifyContent="space-between" alignContent="center">
             <Box
+              
+              w="250px"
               fontSize="2xl"
               fontWeight="semibold"
               as="h4"
               lineHeight="tight"
               isTruncated>
-              {data.name}
+              {props.item.name}
             </Box>
             {/* ADDTOCART BUTTON COMPONENT HERE
             <Tooltip
@@ -140,16 +146,16 @@ const ProductCard = ({item}) => {
               </Button>
             </Tooltip>
              */}
-            <AddToCartButton />
+            <AddToCartButton info={information}/>
           </Flex>
 
           <Flex justifyContent="space-between" alignContent="center">
-            <Rating rating={data.rating} numReviews={data.numReviews} />
+            <Rating rating={props.item.rating} numReviews={props.item.numReviews} />
             <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
               <Box as="span" color={'gray.600'} fontSize="lg">
                 £
               </Box>
-              {data.price.toFixed(2)}
+              {props.item.price.toFixed(2)}
             </Box>
           </Flex>
         </Box>

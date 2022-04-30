@@ -20,11 +20,14 @@ export const MainWrapper = styled.div`
 
 
 export const Main = (props) => {
+    
+    const {data} = []
+
     return (
 
             <div className="Maindiv">
                 <CardWrapper>
-                    <CardRow products={props} />
+                    <CardRow itemList={props.itemList} />
                 </CardWrapper>
             </div>
 

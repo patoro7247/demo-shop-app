@@ -4,54 +4,56 @@ export const cartSlice = createSlice({
     name: 'cart',
     initialState: {
         cartList: [],
+        cartTotal: 0,
     },
     reducers: {
         addToCart: (state, action) => {
-            // think we should have a verify action for cart
-            //Need to change how our shopping cart works; when we add an item to cart, check to see if its id exists already
-            // in the cart, if so, update the quantity for that ID in the cart
-            // cartSlice will handle this logic
 
-            // reference our info with action.payload; if action.payload.id exists in cartList
-            /*
-            const itemAlreadyInCartFlag = false;
-
-            {state.cartList.map(function(item) {
-                if (action.payload.id === item.id) {
-                    itemAlreadyInCartFlag = true;
+            let inArray = false;
+            state.cartList.map(function(item) {
+                if(action.payload.id === item.id) {
+                    item.qty++
+                    inArray = true;
+                    return
                 }
-            })}
-            
-            if (itemAlreadyInCartFlag) {
+            })
+
+            if(!inArray) {
                 state.cartList.push(action.payload)
-            } */
-            state.cartList.push(action.payload)
+            }
+           
         },
-        checkItem: (state, action) => {
-            let alreadyInCart = false;
-            let alreadyInCartID = 0;
-
-
-            {state.cartList.map(function(item) {
-                if (action.payload.id === item.id) {
-                    alreadyInCart = true;
-                    alreadyInCartID = item.id
+        decrementQty: (state, action) => {
+            const id = action.payload;
+            state.cartList.map(function(item) {
+                if(id === item.id) {
+                    item.qty--;
                 }
-            })}
-
-            // if in cart, increment the count in state, incrementCount(state, id)
-            //if(alreadyInCart) {
-                //incrementCount(state, alreadyInCartID)e5wrgtehr
-            //}
-
-
+            })
+            
+        },
+        incrementQty: (state, action) => {
+            const id = action.payload;
+            state.cartList.map(function(item) {
+                if(id === item.id) {
+                    item.qty++;
+                }
+            })
+            
         },
         clearCart: (state) => {
             state.cartList = []
         },
+        updateCartTotal: (state) => {
+            state.cartTotal = 0;
+            state.cartList.map(function(item) {
+                let singleItemTotal = item.qty * item.price
+                state.cartTotal += singleItemTotal
+            })
+        }
     }
 
 })
 
-export const { addToCart, clearCart } = cartSlice.actions
+export const { addToCart, clearCart, decrementQty, incrementQty, updateCartTotal } = cartSlice.actions
 export default cartSlice.reducer

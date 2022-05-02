@@ -89,7 +89,7 @@
     border: var(--border);
     border-radius: var(--border-radius);
     padding: 1rem;
-    overflow: visible;
+    
 }
 
 .menu-item {
@@ -129,13 +129,35 @@
     color: white;
 
 }
-.menu-item-qty {
+
+.menu-item-decrement {
     order: 4;
 }
 
+
+.menu-item-qty {
+    order: 5;
+    color: white;
+}
+
+.menu-item-increment {
+    order: 6;
+}
 .clear-button-container {
     height: 50px;
-    width: 95%;
+    width: 100px;
     align-items: flex-start;
     padding-top: 10px;
+    margin: 0;
+}
+
+.total-amount-container {
+    right: 0;
+    width: 150px;
+}
+
+.total-amount {
+    color: white;
+    right: 0;
+    font-size: 1.3rem;
 }

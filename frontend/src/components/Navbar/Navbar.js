@@ -5,7 +5,7 @@ import './Navbar.css'
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Box, Heading, Center, Image, HStack, Button } from '@chakra-ui/react'
-import { clearCart } from './../../cartSlice.js';
+import { clearCart, decrementQty, incrementQty, updateCartTotal } from './../../cartSlice.js';
 
 
 const example = {
@@ -40,10 +40,13 @@ function Cart(props) {
     const [open, setOpen] = useState(false);
 
     //user change state when they click on item button
+
+
     return (
 
     <li className="nav-item">
-        <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
+        <a href="#" className="icon-button" onClick={() => {setOpen(!open); }} >
+
         <i class="fa-solid fa-cart-flatbed"></i>
 
         {open && props.children}
@@ -55,34 +58,55 @@ function Cart(props) {
 
 function DropMenu() {
     const dispatch = useDispatch()
-    const cartList = useSelector((state) => state.cart.cartList)
+    //dispatch updateCartTotal on every click 
+    let cartList = useSelector((state) => state.cart.cartList)
+    let cartTotal = useSelector((state) => state.cart.cartTotal)
+    
 
     // image, name, price, button(-), curr qty, button(+)
     function DropdownItem(props) {
+        
         return (
-            <div className="menu-item">gg
+            <div className="menu-item" onClick={() => dispatch(updateCartTotal())}>
                         <div className='image-container'>
                             <Image borderRadius='full' boxSize='50px'  src={props.item.img}/>
                         </div>
                         <h2 className='menu-item-name'>{props.item.name}</h2>
                         <p className='menu-item-price'>${props.item.price}</p>
-                        <Button>-</Button>
-                        <p className='menu-item-qty'>${props.item.qty}</p>
-                        <Button>+</Button>
+                        <div className='menu-item-decrement'>
+                            <Button onClick={() => dispatch(decrementQty(props.item.id))}>-</Button>
+                        </div>
+                        <p className='menu-item-qty'>{props.item.qty}</p>
+                        <div className='menu-item-increment'>
+                            <Button onClick={() => dispatch(incrementQty(props.item.id))}>+</Button>
+                        </div>
                 </div>
         );
     }
     
-    
+        const handleDropContainer = (e) => {
+            e.stopPropagation()
+        }
+        
+        const handleClearButton = () => {
+            dispatch(clearCart())
+            dispatch(updateCartTotal())
+        }
+
         return (
             
-            <div className="drop">
+            <div className="drop" onClick={(e) => handleDropContainer(e)}>
                 
                     {cartList.map(function(item, i) {
                         return <DropdownItem item={item} key={i} />
                     })}
                     <div className="clear-button-container">
-                        <Button onClick={() => dispatch(clearCart())} >Clear</Button>
+                        <Button onClick={handleClearButton} >Clear</Button>
+                    </div>
+                    <div className="total-amount-container">
+                        {/* Need a calculate total cart slice function
+                         */}
+                        <p className='total-amount'>Total: ${cartTotal} </p>
                     </div>
             </div>
 

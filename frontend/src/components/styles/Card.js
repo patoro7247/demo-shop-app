@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 
 import { useSelector, useDispatch } from 'react-redux';
-import { addToCart } from './../../cartSlice.js';
+import { addToCart, incrementQty, updateCartTotal } from './../../cartSlice.js';
 
 
 
@@ -69,6 +69,11 @@ const AddToCartButton = (props) => {
   const cardInfo = props.info
   const dispatch = useDispatch()
 
+  const handleAddToCart = (info) => {
+    dispatch(addToCart(info));
+    dispatch(updateCartTotal());
+  }
+
   return(
     <Tooltip
       label="Add to cart"
@@ -76,7 +81,7 @@ const AddToCartButton = (props) => {
       placement={'top'}
       color={'gray.800'}
       fontSize={'1.2em'}>
-      <Button onClick={() => dispatch(addToCart(cardInfo))} display={'flex'}>
+      <Button onClick={() => dispatch(handleAddToCart(cardInfo))} display={'flex'}>
         <Icon as={FiShoppingCart} h={7} w={7} alignSelf={'center'} />
       </Button>
     </Tooltip>  

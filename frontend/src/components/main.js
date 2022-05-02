@@ -1,4 +1,3 @@
-import './components.css';
 
 import styled from 'styled-components';
 

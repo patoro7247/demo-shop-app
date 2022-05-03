@@ -44,6 +44,8 @@ function render() {
 
 
 function App() {
+
+
   return (
     <ChakraProvider>
       <WholeContainer itemList={data}>

@@ -1,4 +1,4 @@
-export const data = {
+const data = {
     productItems:[
         {
             id: '1',
@@ -31,3 +31,4 @@ export const data = {
     ]
 }
 
+exports.productList = data

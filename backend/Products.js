@@ -21,7 +21,7 @@ const data = {
         {
             id: '3',
             name: 'Goggs',
-            price: 40,
+            price: 200,
             img:'https://i5.walmartimages.com/asr/6b01918b-b013-4a96-acf3-7f52eb005370_1.85438d100fbaf8e832dfa6d828d4e3b0.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF',
             qty: 1,
             rating: 4.9,

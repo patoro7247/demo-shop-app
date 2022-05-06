@@ -5,6 +5,7 @@ export const cartSlice = createSlice({
     initialState: {
         cartList: [],
         cartTotal: 0,
+        counter: 0,
     },
     reducers: {
         addToCart: (state, action) => {
@@ -27,7 +28,9 @@ export const cartSlice = createSlice({
             const id = action.payload;
             state.cartList.map(function(item) {
                 if(id === item.id) {
-                    item.qty--;
+                    if(item.qty > 0) {
+                        item.qty--;
+                    }                
                 }
             })
             
@@ -36,7 +39,9 @@ export const cartSlice = createSlice({
             const id = action.payload;
             state.cartList.map(function(item) {
                 if(id === item.id) {
-                    item.qty++;
+                    if (item.qty < 20) item.qty++;
+                        
+
                 }
             })
             
@@ -46,14 +51,20 @@ export const cartSlice = createSlice({
         },
         updateCartTotal: (state) => {
             state.cartTotal = 0;
-            state.cartList.map(function(item) {
+  
+
+            state.cartList.filter((item) => item.qty >= 1).map(function(item) {
                 let singleItemTotal = item.qty * item.price
                 state.cartTotal += singleItemTotal
             })
+
+        },
+        updateCounter: (state) => {
+            state.cartList = state.cartList.filter((item) => item.qty >= 1)
         }
     }
 
 })
 
-export const { addToCart, clearCart, decrementQty, incrementQty, updateCartTotal } = cartSlice.actions
+export const { addToCart, clearCart, decrementQty, incrementQty, updateCartTotal, updateCounter } = cartSlice.actions
 export default cartSlice.reducer

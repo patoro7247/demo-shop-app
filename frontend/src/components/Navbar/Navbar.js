@@ -1,20 +1,13 @@
 import React, { Component, useState } from 'react';
-import { MenuItems } from "./MenuItems";
+
 import './Navbar.css'
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Box, Heading, Center, Image, HStack, Button } from '@chakra-ui/react'
-import { clearCart, decrementQty, incrementQty, updateCartTotal } from './../../cartSlice.js';
+import { Heading, Center, Image, Button } from '@chakra-ui/react'
+import { clearCart, decrementQty, incrementQty, updateCartTotal, updateCounter } from './../../cartSlice.js';
 
 
-const example = {
-    //Picture, Name, Qty
-    pic: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=4600&q=80',
-    name: 'Wayfarer Classic',
-    price: 4.50, 
-    qty: 1 
-}
 
 class Navbar extends Component {
     
@@ -40,14 +33,17 @@ function Cart(props) {
     const [open, setOpen] = useState(false);
 
     //user change state when they click on item button
-
-
+    let counter = useSelector((state) => state.cart.cartList.length)
+ 
     return (
 
     <li className="nav-item">
         <a href="#" className="icon-button" onClick={() => {setOpen(!open); }} >
 
-        <i class="fa-solid fa-cart-flatbed"></i>
+        <div className="cart-icon-counter-container">
+            <i className="fa-solid fa-cart-flatbed"></i>
+            <span className="dot"><p className='counter'>{counter}</p></span>
+        </div>
 
         {open && props.children}
 
@@ -66,6 +62,23 @@ function DropMenu() {
     // image, name, price, button(-), curr qty, button(+)
     function DropdownItem(props) {
         
+
+        function handleIncrement() {
+            dispatch(incrementQty(props.item.id));
+            dispatch(updateCartTotal());
+            dispatch(updateCounter());
+ 
+            return;
+        }
+
+        function handleDecrement() {
+            dispatch(decrementQty(props.item.id));
+            dispatch(updateCartTotal());
+            dispatch(updateCounter());
+            return;
+        }
+
+
         return (
             <div className="menu-item" onClick={() => dispatch(updateCartTotal())}>
                         <div className='image-container'>
@@ -74,11 +87,11 @@ function DropMenu() {
                         <h2 className='menu-item-name'>{props.item.name}</h2>
                         <p className='menu-item-price'>${props.item.price}</p>
                         <div className='menu-item-decrement'>
-                            <Button onClick={() => dispatch(decrementQty(props.item.id))}>-</Button>
+                            <Button onClick={() => handleDecrement()}>-</Button>
                         </div>
                         <p className='menu-item-qty'>{props.item.qty}</p>
                         <div className='menu-item-increment'>
-                            <Button onClick={() => dispatch(incrementQty(props.item.id))}>+</Button>
+                            <Button onClick={() => handleIncrement()}>+</Button>
                         </div>
                 </div>
         );

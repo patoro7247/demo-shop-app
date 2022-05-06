@@ -28,7 +28,7 @@ function Cart(props) {
 
     <li className="nav-item">
         <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
-        <i class="fa-solid fa-cart-flatbed"></i>
+        <i className="fa-solid fa-cart-flatbed"></i>
 
         {open && props.children}
 

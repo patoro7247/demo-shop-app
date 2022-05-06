@@ -161,3 +161,22 @@
     right: 0;
     font-size: 1.3rem;
 }
+
+.dot {
+    position: absolute;
+    height: 17px;
+    width: 17px;
+    background-color: rgb(226, 17, 17);
+    border-radius: 50%;
+    display: inline-block;
+    left: 12px;
+    bottom: -3px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .counter {
+
+  }

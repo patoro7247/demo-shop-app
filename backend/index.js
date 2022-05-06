@@ -1,16 +1,24 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 
-const port = 3001;
+const cors = require('cors');
+app.use(cors());
+
+app.use(express.static(path.resolve(__dirname, '../frontend/build', 'index.html')));
+
+
+const PORT = process.env.PORT || 3001;
 
 var products = require('./Products.js')
 
-app.get('/', (req, res) => {
-    res.send('yoyo')
-})
 
 app.get('/products', (req, res) => {
     res.json(products.productList);
-})
+});
 
-app.listen(port, () => console.log(`Listening on port ${port}!`))
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
+});
+
+app.listen(PORT, () => console.log(`Listening on port ${PORT}!`))

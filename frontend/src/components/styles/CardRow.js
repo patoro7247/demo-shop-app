@@ -25,8 +25,8 @@ const CardRow = (props) => {
   return (
       <Center alignItems="center" justifyContent="center">
           <Flex  w="sm" alignItems="center" justifyContent="center" position="auto">
-              {specificItemList.map(function(productItem) {
-                return <ProductCard item={productItem} />
+              {specificItemList.map(function(productItem, i) {
+                return <ProductCard item={productItem} key={i} />
               })}
 
           </Flex>

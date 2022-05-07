@@ -7,9 +7,10 @@ import React, {useState, useEffect, } from 'react';
 function App() {
   const [items, setItems] = useState([]);
 
+  const PORT = process.env.PORT || 3001;
 
   useEffect(() => {
-    fetch("http://localhost:3001/products")
+    fetch(`http://localhost:${PORT}/products`)
       .then((res) => res.json())
       .then((items) => setItems(items))
   }, []);

@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 
 var products = require('./Products.js')
 

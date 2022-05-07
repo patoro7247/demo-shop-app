@@ -7,7 +7,7 @@ import React, {useState, useEffect, } from 'react';
 function App() {
   const [items, setItems] = useState([]);
 
-  const PORT = process.env.PORT || 3001;
+  const PORT = process.env.PORT;
 
   useEffect(() => {
     fetch(`http://localhost:${PORT}/products`)

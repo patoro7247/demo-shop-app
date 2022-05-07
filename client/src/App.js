@@ -10,7 +10,7 @@ function App() {
   const PORT = process.env.PORT;
 
   useEffect(() => {
-    fetch(`https://storefront-app.herokuapp.com/products`)
+    fetch(`https://mock-storefront.herokuapp.com/products`)
       .then((res) => res.json())
       .then((items) => setItems(items))
   }, []);

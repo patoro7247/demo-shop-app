@@ -1,11 +1,10 @@
 
-import styled from 'styled-components';
 
 import {CardWrapper} from './styles/CardWrapper.styled.js';
 import CardRow from './styles/CardRow.js'
 
 
- const Main = (props) => {
+export const Main = (props) => {
 
 
     return (
@@ -19,4 +18,3 @@ import CardRow from './styles/CardRow.js'
     )
 }
 
-export default Main;

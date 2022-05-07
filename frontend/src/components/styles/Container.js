@@ -1,7 +1,7 @@
 import {Box} from '@chakra-ui/react';
 
-import {Main} from './../Main.js';
-import {MainWrapper} from './../MainWrapper.js';
+import { Main } from './../Main.js';
+import { MainWrapper } from './../MainWrapper.js';
 import {Footer} from './../styles/Footer.styled';
 import Navbar from "./../Navbar/Navbar";
 

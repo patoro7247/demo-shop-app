@@ -17,6 +17,7 @@ export const cartSlice = createSlice({
                     inArray = true;
                     return
                 }
+                return
             })
 
             if(!inArray) {
@@ -32,6 +33,7 @@ export const cartSlice = createSlice({
                         item.qty--;
                     }                
                 }
+                return
             })
             
         },

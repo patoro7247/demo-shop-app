@@ -1,11 +1,7 @@
 import './App.css';
 import { ChakraProvider } from '@chakra-ui/react';
 import {WholeContainer} from './components/styles/Container.js';
-import {data} from './components/Cart/Products.js'
 import React, {useState, useEffect, } from 'react';
-import { applyMiddleware } from 'redux';
-
-
 
 
 function App() {

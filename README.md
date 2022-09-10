@@ -1,6 +1,6 @@
 # demo-shop-app
 
-Live at https://mock-storefront.herokuapp.com
+Live at https://shop.paethos.me
 
 This is a small ecommerce shop project I made using React, Redux, Node.js, and Express.  
 A User can add various products/quanties to a responsive shopping cart that fetches a  

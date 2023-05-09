@@ -8,7 +8,7 @@ import Navbar from "./../Navbar/Navbar";
 
 
 export const WholeContainer = (props) => {
-  
+  //console.log(props.itemList)
 
   return (
       <Box 

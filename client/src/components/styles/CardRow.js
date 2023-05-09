@@ -17,7 +17,7 @@ const CardRow = (props) => {
   //When passing props to child object, you can reference the props in the child object
   //with props.propNameYouPassedFromParent 
 
-  const specificItemList = props.itemList.productItems;
+  let specificItemList = props.itemList;
 
   //data is list of products, pass a product as a prop to each ProductCard
 

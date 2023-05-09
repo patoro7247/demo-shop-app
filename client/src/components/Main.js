@@ -5,7 +5,7 @@ import CardRow from './styles/CardRow.js'
 
 
 export const Main = (props) => {
-
+    console.log(props.itemList);
 
     return (
 
